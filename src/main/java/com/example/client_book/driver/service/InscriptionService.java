@@ -6,7 +6,9 @@ import com.example.client_book.driver.util.ApiError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class InscriptionService {
@@ -26,5 +28,17 @@ public class InscriptionService {
         catch (Exception e) {
             throw new ApiError("saveInscription fail", e);
         }
+    }
+
+    public List<Inscription> returnAllInscriptions(){
+
+        List<Inscription> inscriptionList = new ArrayList<>();
+        Iterable<Inscription> all = inscriptionRepository.findAll();
+
+        for(Inscription inscription : all){
+            inscriptionList.add(inscription);
+        }
+
+        return inscriptionList;
     }
 }

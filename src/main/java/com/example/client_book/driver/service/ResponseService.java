@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ResponseService {
 
@@ -17,6 +19,11 @@ public class ResponseService {
 
         ApiJsonAnswer apiJsonAnswer = new ApiJsonAnswer();
         Inscription inscription = inscriptionService.saveInscription(message);
+
+        apiJsonAnswer.setId(inscription.getId());
+        apiJsonAnswer.setName("Added");
+        apiJsonAnswer.setDescription(inscription.getMessage());
+        apiJsonAnswer.setStatus(HttpStatus.OK);
 
         if(inscription != null) {
             return ResponseEntity.status(HttpStatus.OK).body(apiJsonAnswer);
